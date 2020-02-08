@@ -173,7 +173,12 @@ public class SUCHandler extends AMLEntityHandler {
 		OWLAnnotation hasSemantic = factory.getOWLAnnotation(factory.getRDFSComment(), factory.getOWLLiteral("SystemUnitClass")); 
 		OWLAnnotationAssertionAxiom ax_hasSemantic = factory.getOWLAnnotationAssertionAxiom(ind_suf.getIRI(), hasSemantic);
 		manager.applyChange(new AddAxiom(ont, ax_hasSemantic));
-		
+
+		OWLAnnotation hasLabel = factory.getOWLAnnotation(factory.getRDFSLabel(), factory.getOWLLiteral(obj.getName()));
+		OWLAnnotationAssertionAxiom axHasLabel = factory.getOWLAnnotationAssertionAxiom(ind_suf.getIRI(), hasLabel);
+		manager.applyChange(new AddAxiom(ont, axHasLabel));
+
+
 //		OWLClassAssertionAxiom isSUC = factory.getOWLClassAssertionAxiom(factory.getOWLClass(AMLClassIRIs.SYSTEMUNIT_CLASS), ind_suf);
 //		manager.applyChange(new AddAxiom(ont, isSUC));
 		

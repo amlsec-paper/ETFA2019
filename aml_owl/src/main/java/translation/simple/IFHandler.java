@@ -74,8 +74,11 @@ public class IFHandler extends AMLClassHandler {
 		OWLAnnotation hasSemantic = factory.getOWLAnnotation(factory.getRDFSComment(), factory.getOWLLiteral("InterfaceClass")); 
 		OWLAnnotationAssertionAxiom ax_hasSemantic = factory.getOWLAnnotationAssertionAxiom(owl_icf.getIRI(), hasSemantic);
 		manager.applyChange(new AddAxiom(ont, ax_hasSemantic));
-		
-		
+
+		OWLAnnotation hasLabel = factory.getOWLAnnotation(factory.getRDFSLabel(), factory.getOWLLiteral(obj.getName()));
+		OWLAnnotationAssertionAxiom axHasLabel = factory.getOWLAnnotationAssertionAxiom(owl_icf.getIRI(), hasLabel);
+		manager.applyChange(new AddAxiom(ont, axHasLabel));
+
 		// Sub interfaces: the hierarchy of sub interfaces in AML has no specific semantics, will be ignored.
 		// All sub interfaces will be transformed to flat structures, unless they have subclass relationship to the parent		
 		for(InterfaceFamilyType sub_icf : icf.getInterfaceClass()) {

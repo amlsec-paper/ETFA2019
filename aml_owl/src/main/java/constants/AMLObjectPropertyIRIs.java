@@ -58,9 +58,9 @@ public final class AMLObjectPropertyIRIs {
 		
 	public static final IRI HAS_REF_BASE_SYSTEMUNIT_PATH = IRI.create(Consts.aml_pref + "refBaseSystemUnitPath");
 	
-	public static final IRI HAS_REFPARTNER_SIDE_A = IRI.create(Consts.aml_pref + "refPartnerSideA");
+	public static final IRI HAS_REFPARTNER_SIDE_A = IRI.create(Consts.aml_pref + "hasRefPartnerSideA");
 	
-	public static final IRI HAS_REFPARTNER_SIDE_B = IRI.create(Consts.aml_pref + "refPartnerSideB");
+	public static final IRI HAS_REFPARTNER_SIDE_B = IRI.create(Consts.aml_pref + "hasRefPartnerSideB");
 	
 	public static final IRI HAS_REF_SEMANTIC = IRI.create(Consts.aml_pref + "refSemantic");
 	

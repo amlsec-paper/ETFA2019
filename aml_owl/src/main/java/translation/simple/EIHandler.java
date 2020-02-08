@@ -94,6 +94,10 @@ public class EIHandler extends AMLEntityHandler{
 		OWLAnnotation hasSemantic = factory.getOWLAnnotation(factory.getRDFSComment(), factory.getOWLLiteral("ExternalInterface")); 
 		OWLAnnotationAssertionAxiom ax_hasSemantic = factory.getOWLAnnotationAssertionAxiom(ind_ei.getIRI(), hasSemantic);
 		manager.applyChange(new AddAxiom(ont, ax_hasSemantic));
+
+		OWLAnnotation hasLabel = factory.getOWLAnnotation(factory.getRDFSLabel(), factory.getOWLLiteral(obj.getName()));
+		OWLAnnotationAssertionAxiom axHasLabel = factory.getOWLAnnotationAssertionAxiom(ind_ei.getIRI(), hasLabel);
+		manager.applyChange(new AddAxiom(ont, axHasLabel));
 		
 		// handle the EI in case it belongs to an AML class
 		if(entity.getEntityType().equals(EntityType.CLASS)) {			

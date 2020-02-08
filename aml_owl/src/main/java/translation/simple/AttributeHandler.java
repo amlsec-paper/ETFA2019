@@ -165,7 +165,7 @@ public class AttributeHandler extends AMLEntityHandler{
 		
 		// convert structured attributes to flat cascaded attributes
 		if(attribute.getAttribute().size() == 0) {							
-			IRI iri = IRI.create(ns + "has_" + name);
+			IRI iri = IRI.create(ns + "has" + name.substring(0, 1).toUpperCase() + name.substring(1));
 //			System.out.println(iri.toString());
 			handleAttribute(attribute, entity, ont, iri);
 		}else {
@@ -185,7 +185,7 @@ public class AttributeHandler extends AMLEntityHandler{
 		
 		// convert structured attributes to flat cascaded attributes
 		if(attribute.getAttribute().size() == 0) {
-			IRI iri = IRI.create(ns + "has_" + attribute.getName());
+			IRI iri = IRI.create(ns + "has" + attribute.getName().substring(0, 1).toUpperCase() + attribute.getName().substring(1));
 			handleAttribute(attribute, entity, ont, iri);
 		}else {
 			System.out.println("Attribute " + attribute.getName() + " has sub attributes");
@@ -201,7 +201,7 @@ public class AttributeHandler extends AMLEntityHandler{
 			return null;
 		}else
 		{
-			IRI iri = IRI.create(ns + "has_" + name);
+			IRI iri = IRI.create(ns + "has" + name.substring(0, 1).toUpperCase() + name.substring(1));
 			OWLDataProperty hasAttribute = factory.getOWLDataProperty(iri);		
 			OWLDatatype datatype = this.getOWLDatatype(attr.getAttributeDataType());
 			OWLDataPropertyRangeAxiom rangeAxiom = factory.getOWLDataPropertyRangeAxiom(
@@ -246,7 +246,7 @@ public class AttributeHandler extends AMLEntityHandler{
 	@Override
 	public IRI createIRI(CAEXObject obj) {
 		AttributeType attr = (AttributeType) obj;
-		return IRI.create(ns + "has_" + attr.getName());
+		return IRI.create(ns + "has" + attr.getName().substring(0, 1).toUpperCase() + attr.getName().substring(1));
 	}
 	
 	public static String[] deserializeIRItoArray(IRI iri) {
