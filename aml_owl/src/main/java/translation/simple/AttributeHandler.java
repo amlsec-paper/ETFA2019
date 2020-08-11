@@ -188,7 +188,7 @@ public class AttributeHandler extends AMLEntityHandler{
 			IRI iri = IRI.create(ns + "has" + attribute.getName().substring(0, 1).toUpperCase() + attribute.getName().substring(1));
 			handleAttribute(attribute, entity, ont, iri);
 		}else {
-			System.out.println("Attribute " + attribute.getName() + " has sub attributes");
+			//System.out.println("Attribute " + attribute.getName() + " has sub attributes");
 			handleSubAttributes(attribute, entity, ont, attribute.getName());
 		}		
 	}

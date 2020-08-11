@@ -34,11 +34,15 @@ public class ILHandler extends AMLEntityHandler {
         InternalLinkType il = (InternalLinkType) obj;
         OWLNamedIndividual ind_il;
 
+        // Change the links name to include the refPartnerSideA and refPartnerSideB
+        // This ensures that the links name is unique, even if they share the same name
+        il.setName(il.getName() + " - " + il.getRefPartnerSideA() + " - " + il.getRefPartnerSideB());
+
         // Create the OWL entity for the IL
         if (entity.getEntityType().equals(EntityType.NAMED_INDIVIDUAL))
             ind_il = (OWLNamedIndividual) cvt2Owl(il, ont);
         else
-            ind_il = factory.getOWLNamedIndividual(IRI.create(ns + il.getName()));
+            ind_il = factory.getOWLNamedIndividual(IRI.create(ns + il.getName().replace(" ", "%20")));
 
         OWLDeclarationAxiom ax_il = factory.getOWLDeclarationAxiom(ind_il);
         manager.applyChange(new AddAxiom(ont, ax_il));
@@ -66,9 +70,9 @@ public class ILHandler extends AMLEntityHandler {
     public IRI createIRI(CAEXObject obj) {
         InternalLinkType il = (InternalLinkType) obj;
         if (il.getID() != null)
-            return IRI.create(ns + String.join("_", "il", obj.getName(), obj.getID()));
+            return IRI.create(ns + String.join("_", "il", obj.getName().replace(" ", "%20"), obj.getID()));
         else
-            return IRI.create(ns + String.join("_", "il", obj.getName()));
+            return IRI.create(ns + String.join("_", "il", obj.getName().replace(" ", "%20")));
     }
 
     /**
@@ -134,13 +138,13 @@ public class ILHandler extends AMLEntityHandler {
         if (entity.getEntityType().equals(EntityType.NAMED_INDIVIDUAL))
             indIL = (OWLNamedIndividual) cvt2Owl(il, ont);
         else
-            indIL = factory.getOWLNamedIndividual(IRI.create(ns + il.getName()));
+            indIL = factory.getOWLNamedIndividual(IRI.create(ns + il.getName().replace(" ", "%20")));
 
         OWLIndividual indA = getRefPartnerSideIndividualFromInstanceHierarchy(iht.getInternalElement(), il, ont, true);
         OWLIndividual indB = getRefPartnerSideIndividualFromInstanceHierarchy(iht.getInternalElement(), il, ont, false);
 
         if (indA != null && indB != null) {
-            System.out.println("new link: " + il);
+            //System.out.println("new link: " + il);
             OWLObjectPropertyExpression hasRefSideA = factory.getOWLObjectProperty(AMLObjectPropertyIRIs.HAS_REFPARTNER_SIDE_A);
             OWLObjectPropertyExpression hasRefSideB = factory.getOWLObjectProperty(AMLObjectPropertyIRIs.HAS_REFPARTNER_SIDE_B);
             OWLObjectPropertyAssertionAxiom axRefA = factory.getOWLObjectPropertyAssertionAxiom(hasRefSideA, indIL, indA);
